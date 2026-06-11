@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lēf Floral & Botanical — Columbus, Ohio</title>
+<script src="https://cdn.tailwindcss.com"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Jost:wght@400;500;600&display=swap" rel="stylesheet">
+
+<style>
+/* ══════════════════════════════════════
+   PAPER TEXTURE
+══════════════════════════════════════ */
+.paper::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+  background-repeat: repeat;
+  mix-blend-mode: overlay;
+  opacity: 0.5;
+}
+.paper { position: relative; }
+.paper > * { position: relative; z-index: 1; }
+.paper-coarse::before {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.60' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.065'/%3E%3C/svg%3E");
+  opacity: 0.65;
+}
+
+/* ══════════════════════════════════════
+   BASE — font-weight 400 minimum everywhere
+══════════════════════════════════════ */
+*, *::before, *::after { box-sizing: border-box; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;           /* was 300 — now normal everywhere */
+  font-size: 18px;            /* 18px floor for all body copy */
+  background-color: #F4EFE6;
+  color: #1C1E19;
+  line-height: 1.85;
+  -webkit-font-smoothing: antialiased;
+  margin: 0;
+}
+
+/* ── TYPE SCALE ──────────────────────────
+   H1 display:  72–88px  serif italic 400
+   H2 section:  44–60px  serif italic 400
+   H3 sub:      26–32px  serif roman  600
+   Eyebrow:     11px     jost 600 caps tracked
+   Nav/links:   16px     jost 500
+   Body:        18px     jost 400
+   Caption/meta:16px     jost 400
+   ──────────────────────────────────────── */
+
+.serif-display {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-style: italic;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+.serif-section {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 400;
+  font-style: italic;
+  line-height: 1.15;
+}
+.serif-sub {
+  font-family: 'Cormorant Garamond', serif;
+  font-weight: 600;
+  font-style: normal;
+  line-height: 1.3;
+}
+
+/* Eyebrow: keep tracked caps, bump to 11px */
+.eyebrow {
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+}
+
+.gold-rule {
+  width: 44px; height: 1px;
+  background: #C8A96E;
+  display: block;
+  margin-bottom: 20px;
+}
+
+/* ══════════════════════════════════════
+   BUTTONS — 11px min, font-weight 600
+══════════════════════════════════════ */
+.btn {
+  font-family: 'Jost', sans-serif;
+  font-weight: 600;
+  font-size: 11px;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  padding: 15px 30px;
+  min-height: 48px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  cursor: pointer;
+  border: none;
+  transition: background 220ms ease, color 220ms ease, border-color 220ms ease;
+  line-height: 1;
+}
+.btn-deep-moss         { background: #3A4422; color: #F0EBE0; }
+.btn-deep-moss:hover   { background: #1E2A18; }
+.btn-outline-dark      { background: transparent; color: #1C1E19; border: 1px solid rgba(28,30,25,0.4); }
+.btn-outline-dark:hover{ background: #1C1E19; color: #F0EBE0; }
+.btn-outline-cream     { background: transparent; color: #F0EBE0; border: 1px solid rgba(240,235,224,0.5); }
+.btn-outline-cream:hover { background: rgba(240,235,224,0.1); }
+
+/* ══════════════════════════════════════
+   NAV SCROLL
+══════════════════════════════════════ */
+.utility-bar { transition: transform 300ms ease, opacity 300ms ease; }
+.main-nav    { transition: background 300ms ease, box-shadow 300ms ease; }
+.main-nav.scrolled {
+  background: rgba(20,28,16,0.97);
+  backdrop-filter: blur(6px);
+  box-shadow: 0 1px 0 rgba(200,169,110,0.18);
+}
+
+/* ══════════════════════════════════════
+   PRODUCT CARDS
+══════════════════════════════════════ */
+.product-card { transition: transform 240ms ease, box-shadow 240ms ease; cursor: pointer; }
+.product-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(30,42,24,0.14); }
+.product-card:hover .card-name { font-style: italic; }
+.card-name { transition: font-style 200ms ease; }
+
+/* ══════════════════════════════════════
+   OCCASION CARDS
+══════════════════════════════════════ */
+.occasion-card { transition: transform 200ms ease; }
+.occasion-card:hover { transform: translateY(-3px); }
+
+/* ══════════════════════════════════════
+   INPUTS
+══════════════════════════════════════ */
+input, textarea {
+  outline: none;
+  font-family: 'Jost', sans-serif;
+  font-weight: 400;
+  font-size: 16px;
+}
+input::placeholder, textarea::placeholder { color: rgba(240,235,224,0.4); }
+
+/* ══════════════════════════════════════
+   NAV LINK — 16px, weight 500
+══════════════════════════════════════ */
+.nav-link {
+  font-family: 'Jost', sans-serif;
+  font-weight: 500;
+  font-size: 16px;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: color 200ms;
+}
+</style>
+</head>
+
+<body>
+
+<!-- ═══════════════════════════════════════════
+     UTILITY BAR  — oat text on darkest forest
+════════════════════════════════════════════ -->
+<div class="utility-bar paper paper-coarse" style="background:#141C10;" id="utilityBar">
+  <div style="max-width:1280px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:40px;">
+    <span style="font-family:'Jost',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.06em;color:#F0EBE0;">(614) 254-6280</span>
+    <span style="font-family:'Jost',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.06em;color:#C8A96E;">Mon–Fri 10am–4pm &nbsp;·&nbsp; Sat Closed (Summer)</span>
+    <span style="font-family:'Jost',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.06em;color:#F0EBE0;">243 N. 5th St &nbsp;·&nbsp; Columbus, OH</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════════════
+     PRIMARY NAV  — oat text on forest
+════════════════════════════════════════════ -->
+<nav class="main-nav paper" style="background:#1E2A18;position:sticky;top:0;z-index:50;" id="mainNav">
+  <div style="max-width:1280px;margin:0 auto;padding:0 40px;display:flex;align-items:center;justify-content:space-between;height:62px;">
+
+    <!-- Logo -->
+    <a href="#" class="serif-section" style="color:#F0EBE0;font-size:28px;text-decoration:none;letter-spacing:-0.01em;">lēf floral</a>
+
+    <!-- Nav links — 16px, oat, weight 500 -->
+    <div style="display:flex;align-items:center;gap:36px;">
+      <a href="#shop"     class="nav-link" style="color:#F0EBE0;" onmouseover="this.style.color='#C8A96E'" onmouseout="this.style.color='#F0EBE0'">Shop</a>
+      <a href="#weddings" class="nav-link" style="color:#F0EBE0;" onmouseover="this.style.color='#C8A96E'" onmouseout="this.style.color='#F0EBE0'">Weddings</a>
+      <a href="#about"    class="nav-link" style="color:#F0EBE0;" onmouseover="this.style.color='#C8A96E'" onmouseout="this.style.color='#F0EBE0'">About</a>
+      <a href="#hortus"   class="nav-link" style="color:#F0EBE0;" onmouseover="this.style.color='#C8A96E'" onmouseout="this.style.color='#F0EBE0'">Hortus</a>
+      <a href="#contact"  class="nav-link" style="color:#F0EBE0;" onmouseover="this.style.color='#C8A96E'" onmouseout="this.style.color='#F0EBE0'">Contact</a>
+    </div>
+
+    <!-- Right: cart + CTA -->
+    <div style="display:flex;align-items:center;gap:16px;">
+      <button aria-label="Cart" style="background:none;border:none;cursor:pointer;color:#F0EBE0;padding:4px;transition:color 200ms;" onmouseover="this.style.color='#C8A96E'" onmouseout="this.style.color='#F0EBE0'">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+          <path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/>
+          <line x1="3" y1="6" x2="21" y2="6"/>
+          <path d="M16 10a4 4 0 01-8 0"/>
+        </svg>
+      </button>
+      <a href="#weddings" class="btn btn-deep-moss" style="font-size:11px;padding:12px 20px;">Plan Your Wedding</a>
+    </div>
+  </div>
+</nav>
+
+<!-- ANNOUNCEMENT BAR -->
+<div class="paper paper-coarse" style="background:#3A4422;text-align:center;padding:10px 24px;">
+  <span style="font-family:'Jost',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#F0EBE0;">
+    June · Pride Month &amp; Father's Day &nbsp;—&nbsp; Father's Day June 21 &nbsp;
+    <a href="#shop" style="color:#C8A96E;text-decoration:underline;text-underline-offset:3px;font-weight:600;">Send flowers like you mean it →</a>
+  </span>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     HERO  (light oat)
+════════════════════════════════════════════ -->
+<section class="paper" style="background:#F4EFE6;min-height:92vh;display:grid;grid-template-columns:1fr 1fr;overflow:hidden;">
+
+  <!-- LEFT: Copy -->
+  <div style="display:flex;flex-direction:column;justify-content:center;padding:80px 56px 80px 80px;">
+    <span class="gold-rule"></span>
+    <span class="eyebrow" style="color:#C8A96E;display:block;margin-bottom:24px;">Garden-Inspired Florist &nbsp;·&nbsp; Downtown Columbus</span>
+
+    <h1 class="serif-display" style="font-size:clamp(56px,5.5vw,88px);color:#1C1E19;margin-bottom:24px;">
+      Garden-inspired<br>design, grown<br>in Columbus.
+    </h1>
+
+    <!-- 18px body copy, weight 400, readable stone-dark -->
+    <p style="color:#3A3C35;font-size:18px;line-height:1.85;max-width:420px;margin-bottom:16px;font-weight:400;">
+      From the flower halls of Harrods to a beautiful old shoe factory on 5th Street — Michelle and Robb have been tending this for three decades.
+    </p>
+
+    <p class="serif-section" style="color:#3A4422;font-size:22px;margin-bottom:44px;">
+      "There are always flowers for those who want to see them." — Matisse
+    </p>
+
+    <div style="display:flex;gap:14px;flex-wrap:wrap;">
+      <a href="#shop"     class="btn btn-deep-moss">Shop Arrangements</a>
+      <a href="#weddings" class="btn btn-outline-dark">Plan Your Wedding</a>
+    </div>
+
+    <!-- Credentials — 16px minimum, weight 400 -->
+    <div style="display:flex;gap:32px;margin-top:52px;padding-top:40px;border-top:1px solid rgba(58,68,34,0.18);flex-wrap:wrap;">
+      <div>
+        <span class="eyebrow" style="color:#9A9D94;display:block;margin-bottom:5px;">UK Training</span>
+        <p class="serif-section" style="color:#3A4422;font-size:18px;margin:0;">Harrods, London</p>
+      </div>
+      <div>
+        <span class="eyebrow" style="color:#9A9D94;display:block;margin-bottom:5px;">Experience</span>
+        <p class="serif-section" style="color:#3A4422;font-size:18px;margin:0;">30+ Years Columbus Floral</p>
+      </div>
+      <div>
+        <span class="eyebrow" style="color:#9A9D94;display:block;margin-bottom:5px;">Delivery</span>
+        <p class="serif-section" style="color:#3A4422;font-size:18px;margin:0;">Franklin County · $14.50</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT: Real flower photography -->
+  <div style="position:relative;overflow:hidden;min-height:92vh;">
+    <img
+      src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=1200&q=85&fit=crop&crop=center"
+      alt="Lush garden floral arrangement"
+      style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;"
+    />
+    <div style="position:absolute;inset:0;background:linear-gradient(to right,#F4EFE6 0%,transparent 14%);pointer-events:none;z-index:1;"></div>
+    <div style="position:absolute;bottom:36px;right:32px;z-index:2;background:rgba(244,239,230,0.9);padding:10px 18px;">
+      <span style="font-family:'Jost',sans-serif;font-weight:600;font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:#3A4422;">Now Booking 2026 Weddings</span>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     CINEMATIC MACRO PAUSE
+════════════════════════════════════════════ -->
+<div class="paper paper-coarse" style="background:#141C10;position:relative;overflow:hidden;height:320px;">
+  <img
+    src="https://images.unsplash.com/photo-1516475429286-465d815a0df7?w=1600&q=80&fit=crop&crop=center"
+    alt="Close up botanical macro"
+    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center;opacity:0.42;"
+  />
+  <div style="position:absolute;inset:0;background:linear-gradient(135deg,rgba(20,28,16,0.72) 0%,rgba(20,28,16,0.52) 100%);z-index:1;"></div>
+  <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;z-index:2;padding:0 32px;">
+    <p class="serif-section" style="color:#F0EBE0;font-size:clamp(26px,3vw,44px);text-align:center;max-width:700px;font-weight:400;">
+      we love our flowers<br>and want you to love them back.
+    </p>
+  </div>
+</div>
+
+
+<!-- ═══════════════════════════════════════════
+     SHOP MODULE  (light oat)
+════════════════════════════════════════════ -->
+<section id="shop" class="paper" style="background:#F4EFE6;">
+  <div style="max-width:1280px;margin:0 auto;padding:96px 40px;">
+
+    <!-- Header -->
+    <div style="display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:52px;flex-wrap:wrap;gap:24px;">
+      <div>
+        <span class="eyebrow" style="color:#C8A96E;display:block;margin-bottom:14px;">The Shop</span>
+        <h2 class="serif-section" style="font-size:clamp(40px,4vw,62px);color:#1C1E19;margin:0;">
+          send flowers<br>like you mean it.
+        </h2>
+      </div>
+      <!-- Occasion pills — 13px eyebrow, legible on oat -->
+      <div style="display:flex;gap:8px;flex-wrap:wrap;align-items:flex-end;padding-bottom:8px;">
+        <button style="font-family:'Jost',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;background:#1E2A18;color:#F0EBE0;border:none;padding:10px 18px;cursor:pointer;">All</button>
+        <button style="font-family:'Jost',sans-serif;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;background:transparent;color:#3A3C35;border:1px solid #C0BAB0;padding:10px 18px;cursor:pointer;">Birthday</button>
+        <button style="font-family:'Jost',sans-serif;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;background:transparent;color:#3A3C35;border:1px solid #C0BAB0;padding:10px 18px;cursor:pointer;">Anniversary</button>
+        <button style="font-family:'Jost',sans-serif;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;background:transparent;color:#3A3C35;border:1px solid #C0BAB0;padding:10px 18px;cursor:pointer;">Sympathy</button>
+        <button style="font-family:'Jost',sans-serif;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;background:transparent;color:#3A3C35;border:1px solid #C0BAB0;padding:10px 18px;cursor:pointer;">Get Well</button>
+        <button style="font-family:'Jost',sans-serif;font-weight:500;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;background:transparent;color:#3A3C35;border:1px solid #C0BAB0;padding:10px 18px;cursor:pointer;">Just Because</button>
+      </div>
+    </div>
+
+    <!-- Designer's Choice Banner -->
+    <div class="paper paper-coarse" style="background:#EBE3D4;padding:36px 44px;display:flex;align-items:center;justify-content:space-between;gap:32px;margin-bottom:36px;border-left:3px solid #C8A96E;flex-wrap:wrap;">
+      <div style="flex:1;min-width:240px;">
+        <span class="eyebrow" style="color:#C8A96E;display:block;margin-bottom:12px;">Signature Collection</span>
+        <h3 class="serif-sub" style="font-size:26px;color:#1C1E19;margin-bottom:10px;">Our most personal work — made for you,<br>with whatever is most beautiful today.</h3>
+        <p style="color:#3A3C35;font-size:18px;line-height:1.8;margin:0;font-weight:400;">One-of-a-kind seasonal designs. The freshest flowers, chosen the morning they're made.</p>
+      </div>
+      <div style="display:flex;gap:28px;flex-shrink:0;">
+        <div style="text-align:center;">
+          <span class="eyebrow" style="display:block;color:#7A7D74;margin-bottom:8px;">Lovely</span>
+          <p class="serif-sub" style="font-size:26px;color:#1C1E19;margin:0;">$65</p>
+        </div>
+        <div style="text-align:center;">
+          <span class="eyebrow" style="display:block;color:#7A7D74;margin-bottom:8px;">Perfection</span>
+          <p class="serif-sub" style="font-size:26px;color:#1C1E19;margin:0;">$85</p>
+        </div>
+        <div style="text-align:center;">
+          <span class="eyebrow" style="display:block;color:#7A7D74;margin-bottom:8px;">Exquisite</span>
+          <p class="serif-sub" style="font-size:26px;color:#1C1E19;margin:0;">$100</p>
+        </div>
+        <div style="text-align:center;">
+          <span class="eyebrow" style="display:block;color:#7A7D74;margin-bottom:8px;">Sublime</span>
+          <p class="serif-sub" style="font-size:26px;color:#1C1E19;margin:0;">$125</p>
+        </div>
+      </div>
+      <a href="#" class="btn btn-deep-moss" style="flex-shrink:0;">Choose Yours</a>
+    </div>
+
+    <!-- Product Grid -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:#D4CFC6;">
+
+      <!-- CARD: Radiance -->
+      <div class="product-card" style="background:#F4EFE6;display:flex;flex-direction:column;">
+        <div style="aspect-ratio:4/5;overflow:hidden;position:relative;">
+          <img src="https://images.unsplash.com/photo-1518895949257-7621c3c786d7?w=700&q=82&fit=crop&crop=center"
+            alt="Radiance arrangement"
+            style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 600ms ease;"
+            onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" />
+        </div>
+        <div style="padding:22px 24px 28px;">
+          <span class="eyebrow" style="color:#7A7D74;display:block;margin-bottom:10px;">Named Arrangement</span>
+          <p class="card-name serif-sub" style="font-size:26px;color:#1C1E19;margin-bottom:8px;">Radiance</p>
+          <p style="font-size:18px;color:#7A7D74;letter-spacing:0.04em;margin-bottom:18px;font-weight:500;font-family:'Jost',sans-serif;">$195</p>
+          <a href="#" class="btn btn-deep-moss" style="font-size:11px;padding:12px 20px;">Add to Cart</a>
+        </div>
+      </div>
+
+      <!-- CARD: Dolce -->
+      <div class="product-card" style="background:#F4EFE6;display:flex;flex-direction:column;">
+        <div style="aspect-ratio:4/5;overflow:hidden;position:relative;">
+          <img src="https://images.unsplash.com/photo-1461354464878-ad92f492a5a0?w=700&q=82&fit=crop&crop=center"
+            alt="Dolce arrangement"
+            style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 600ms ease;"
+            onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" />
+        </div>
+        <div style="padding:22px 24px 28px;">
+          <span class="eyebrow" style="color:#7A7D74;display:block;margin-bottom:10px;">Named Arrangement</span>
+          <p class="card-name serif-sub" style="font-size:26px;color:#1C1E19;margin-bottom:8px;">Dolce</p>
+          <p style="font-size:18px;color:#7A7D74;letter-spacing:0.04em;margin-bottom:18px;font-weight:500;font-family:'Jost',sans-serif;">$175</p>
+          <a href="#" class="btn btn-deep-moss" style="font-size:11px;padding:12px 20px;">Add to Cart</a>
+        </div>
+      </div>
+
+      <!-- CARD: Indigo -->
+      <div class="product-card" style="background:#F4EFE6;display:flex;flex-direction:column;">
+        <div style="aspect-ratio:4/5;overflow:hidden;position:relative;">
+          <img src="https://images.unsplash.com/photo-1499789379661-1aaf370f9ba1?w=700&q=82&fit=crop&crop=center"
+            alt="Indigo arrangement"
+            style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 600ms ease;"
+            onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" />
+        </div>
+        <div style="padding:22px 24px 28px;">
+          <span class="eyebrow" style="color:#7A7D74;display:block;margin-bottom:10px;">Named Arrangement</span>
+          <p class="card-name serif-sub" style="font-size:26px;color:#1C1E19;margin-bottom:8px;">Indigo</p>
+          <p style="font-size:18px;color:#7A7D74;letter-spacing:0.04em;margin-bottom:18px;font-weight:500;font-family:'Jost',sans-serif;">$115</p>
+          <a href="#" class="btn btn-deep-moss" style="font-size:11px;padding:12px 20px;">Add to Cart</a>
+        </div>
+      </div>
+
+      <!-- CARD: Amore -->
+      <div class="product-card" style="background:#F4EFE6;display:flex;flex-direction:column;">
+        <div style="aspect-ratio:4/5;overflow:hidden;position:relative;">
+          <img src="https://images.unsplash.com/photo-1490750967868-88df5691cc88?w=700&q=82&fit=crop&crop=center"
+            alt="Amore arrangement"
+            style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 600ms ease;"
+            onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" />
+        </div>
+        <div style="padding:22px 24px 28px;">
+          <span class="eyebrow" style="color:#7A7D74;display:block;margin-bottom:10px;">Named Arrangement</span>
+          <p class="card-name serif-sub" style="font-size:26px;color:#1C1E19;margin-bottom:8px;">Amore</p>
+          <p style="font-size:18px;color:#7A7D74;letter-spacing:0.04em;margin-bottom:18px;font-weight:500;font-family:'Jost',sans-serif;">$125</p>
+          <a href="#" class="btn btn-deep-moss" style="font-size:11px;padding:12px 20px;">Add to Cart</a>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="text-align:center;margin-top:44px;">
+      <a href="#" class="btn btn-outline-dark">View All Arrangements</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     WEDDING ZONE  (deep teal)
+════════════════════════════════════════════ -->
+<section id="weddings" class="paper paper-coarse" style="background:#1A2E28;overflow:hidden;position:relative;">
+  <div style="max-width:1280px;margin:0 auto;padding:96px 40px;display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start;">
+
+    <!-- LEFT: Copy — all text oat/cream on teal dark -->
+    <div>
+      <span class="gold-rule"></span>
+      <span class="eyebrow" style="color:#C8A96E;display:block;margin-bottom:24px;">Weddings &amp; Events</span>
+      <h2 class="serif-display" style="font-size:clamp(48px,4.5vw,76px);color:#F0EBE0;margin-bottom:28px;">
+        Your day.<br>Your garden.
+      </h2>
+      <p style="color:#F0EBE0;font-size:18px;line-height:1.85;margin-bottom:20px;max-width:440px;font-weight:400;">
+        We've been designing weddings for thirty years. We know how much rides on this day — and we know what grows, when, and from where.
+      </p>
+      <p class="serif-section" style="color:#C8A96E;font-size:22px;margin-bottom:44px;">
+        "Let's sit down together. Your first consultation is our gift to you."
+      </p>
+
+      <!-- Style tags — oat text on teal -->
+      <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:44px;">
+        <span style="font-family:'Jost',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;color:#F0EBE0;border:1px solid rgba(240,235,224,0.3);padding:9px 16px;">Wildflower</span>
+        <span style="font-family:'Jost',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;color:#F0EBE0;border:1px solid rgba(240,235,224,0.3);padding:9px 16px;">Classic White</span>
+        <span style="font-family:'Jost',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;color:#F0EBE0;border:1px solid rgba(240,235,224,0.3);padding:9px 16px;">Jewel Tone</span>
+        <span style="font-family:'Jost',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;color:#F0EBE0;border:1px solid rgba(240,235,224,0.3);padding:9px 16px;">Bohemian</span>
+        <span style="font-family:'Jost',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;color:#F0EBE0;border:1px solid rgba(240,235,224,0.3);padding:9px 16px;">Fall / Seasonal</span>
+        <span style="font-family:'Jost',sans-serif;font-weight:500;font-size:13px;letter-spacing:0.16em;text-transform:uppercase;color:#F0EBE0;border:1px solid rgba(240,235,224,0.3);padding:9px 16px;">Gothic</span>
+      </div>
+
+      <!-- Services — oat text -->
+      <ul style="list-style:none;padding:0;margin:0 0 44px;display:flex;flex-direction:column;gap:14px;">
+        <li style="display:flex;align-items:center;gap:16px;">
+          <span style="width:22px;height:1px;background:#C8A96E;flex-shrink:0;display:block;"></span>
+          <span style="color:#F0EBE0;font-size:18px;font-family:'Jost',sans-serif;font-weight:400;">Bridal &amp; bridesmaids' bouquets</span>
+        </li>
+        <li style="display:flex;align-items:center;gap:16px;">
+          <span style="width:22px;height:1px;background:#C8A96E;flex-shrink:0;display:block;"></span>
+          <span style="color:#F0EBE0;font-size:18px;font-family:'Jost',sans-serif;font-weight:400;">Ceremony arches &amp; floral runners</span>
+        </li>
+        <li style="display:flex;align-items:center;gap:16px;">
+          <span style="width:22px;height:1px;background:#C8A96E;flex-shrink:0;display:block;"></span>
+          <span style="color:#F0EBE0;font-size:18px;font-family:'Jost',sans-serif;font-weight:400;">Reception centerpieces &amp; head table</span>
+        </li>
+        <li style="display:flex;align-items:center;gap:16px;">
+          <span style="width:22px;height:1px;background:#C8A96E;flex-shrink:0;display:block;"></span>
+          <span style="color:#F0EBE0;font-size:18px;font-family:'Jost',sans-serif;font-weight:400;">Floral urns, cake flowers &amp; wearables</span>
+        </li>
+        <li style="display:flex;align-items:center;gap:16px;">
+          <span style="width:22px;height:1px;background:#C8A96E;flex-shrink:0;display:block;"></span>
+          <span style="color:#F0EBE0;font-size:18px;font-family:'Jost',sans-serif;font-weight:400;">Boutonnieres &amp; corsages</span>
+        </li>
+      </ul>
+      <a href="#contact" class="btn btn-deep-moss">Begin Your Consultation</a>
+    </div>
+
+    <!-- RIGHT: Image mosaic + form -->
+    <div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:280px 220px;gap:3px;margin-bottom:28px;">
+        <div style="grid-column:1;grid-row:1;overflow:hidden;position:relative;">
+          <img src="https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=600&q=85&fit=crop&crop=center"
+            alt="Luxury bridal bouquet"
+            style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 700ms ease;"
+            onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(15,30,26,0.5) 0%,transparent 55%);pointer-events:none;"></div>
+          <span style="position:absolute;bottom:14px;left:14px;font-family:'Jost',sans-serif;font-weight:500;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#F0EBE0;">Bridal Bouquet</span>
+        </div>
+        <div style="grid-column:2;grid-row:1;overflow:hidden;position:relative;">
+          <img src="https://images.unsplash.com/photo-1522673607200-164d1b6ce486?w=600&q=85&fit=crop&crop=center"
+            alt="Wedding table centerpiece"
+            style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 700ms ease;"
+            onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'" />
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(15,30,26,0.5) 0%,transparent 55%);pointer-events:none;"></div>
+          <span style="position:absolute;bottom:14px;left:14px;font-family:'Jost',sans-serif;font-weight:500;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#F0EBE0;">Table Centerpiece</span>
+        </div>
+        <div style="grid-column:1 / span 2;grid-row:2;overflow:hidden;position:relative;">
+          <img src="https://images.unsplash.com/photo-1606800052052-a08af7148866?w=1000&q=85&fit=crop&crop=center"
+            alt="Wedding couple with florals"
+            style="width:100%;height:100%;object-fit:cover;object-position:center 30%;display:block;transition:transform 700ms ease;"
+            onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'" />
+          <div style="position:absolute;inset:0;background:linear-gradient(to top,rgba(15,30,26,0.55) 0%,transparent 60%);pointer-events:none;"></div>
+          <span style="position:absolute;bottom:14px;left:14px;font-family:'Jost',sans-serif;font-weight:500;font-size:12px;letter-spacing:0.14em;text-transform:uppercase;color:#F0EBE0;">30 Years of Wedding Design</span>
+        </div>
+      </div>
+
+      <!-- Inquiry form -->
+      <div class="paper paper-coarse" style="background:#0F1E1A;padding:36px 40px;">
+        <span class="eyebrow" style="color:#C8A96E;display:block;margin-bottom:22px;">Start Your Inquiry</span>
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:10px;">
+          <input type="text" placeholder="Your name"    style="background:rgba(240,235,224,0.08);border:1px solid rgba(240,235,224,0.2);color:#F0EBE0;padding:13px 16px;font-size:16px;width:100%;font-weight:400;" />
+          <input type="text" placeholder="Wedding date" style="background:rgba(240,235,224,0.08);border:1px solid rgba(240,235,224,0.2);color:#F0EBE0;padding:13px 16px;font-size:16px;width:100%;font-weight:400;" />
+        </div>
+        <input type="email" placeholder="Email address" style="background:rgba(240,235,224,0.08);border:1px solid rgba(240,235,224,0.2);color:#F0EBE0;padding:13px 16px;font-size:16px;width:100%;display:block;margin-bottom:10px;font-weight:400;" />
+        <textarea placeholder="Tell us about your day — style, venue, feel…" rows="3" style="background:rgba(240,235,224,0.08);border:1px solid rgba(240,235,224,0.2);color:#F0EBE0;padding:13px 16px;font-size:16px;width:100%;display:block;resize:vertical;margin-bottom:14px;line-height:1.7;font-weight:400;"></textarea>
+        <button class="btn btn-deep-moss" style="width:100%;">Send Inquiry</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SHOW THEM THE LOVE  (deep forest)
+════════════════════════════════════════════ -->
+<section class="paper paper-coarse" style="background:#1E2A18;padding:96px 0;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
+
+    <div style="text-align:center;margin-bottom:56px;">
+      <span class="eyebrow" style="color:#C8A96E;display:block;margin-bottom:16px;">2026 · Our Battlecry</span>
+      <h2 class="serif-section" style="font-size:clamp(40px,4vw,62px);color:#F0EBE0;margin:0;">Show Them the Love.</h2>
+      <p style="color:#F0EBE0;font-size:18px;margin:16px auto 0;max-width:440px;line-height:1.85;font-weight:400;">
+        June is full of reasons worth sending flowers for.
+      </p>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:rgba(58,68,34,0.4);">
+
+      <div class="occasion-card paper" style="background:#1E2A18;padding:36px 28px;">
+        <span class="eyebrow" style="color:#C8A96E;display:block;margin-bottom:10px;">June 8</span>
+        <p class="serif-sub" style="font-size:22px;color:#F0EBE0;margin-bottom:12px;">National Best Friends Day</p>
+        <p style="color:#F0EBE0;font-size:17px;line-height:1.8;margin-bottom:22px;font-weight:400;">For the one who picks up the phone at any hour.</p>
+        <span style="font-family:'Jost',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#C8D5A8;">Raspberry Beret · $75 →</span>
+      </div>
+
+      <div class="occasion-card paper" style="background:#1E2A18;padding:36px 28px;">
+        <span class="eyebrow" style="color:#C8A96E;display:block;margin-bottom:10px;">June 19</span>
+        <p class="serif-sub" style="font-size:22px;color:#F0EBE0;margin-bottom:12px;">Juneteenth</p>
+        <p style="color:#F0EBE0;font-size:17px;line-height:1.8;margin-bottom:22px;font-weight:400;">Celebrate freedom. Send something joyful and bold.</p>
+        <span style="font-family:'Jost',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#C8D5A8;">Radiance · $195 →</span>
+      </div>
+
+      <div class="occasion-card paper" style="background:#1E2A18;padding:36px 28px;">
+        <span class="eyebrow" style="color:#C8A96E;display:block;margin-bottom:10px;">June 21</span>
+        <p class="serif-sub" style="font-size:22px;color:#F0EBE0;margin-bottom:12px;">Father's Day</p>
+        <p style="color:#F0EBE0;font-size:17px;line-height:1.8;margin-bottom:22px;font-weight:400;">Not just for mums. Dads deserve the good stuff too.</p>
+        <span style="font-family:'Jost',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#C8D5A8;">Designer's Choice →</span>
+      </div>
+
+      <div class="occasion-card paper" style="background:#1E2A18;padding:36px 28px;">
+        <span class="eyebrow" style="color:#C8A96E;display:block;margin-bottom:10px;">June 26</span>
+        <p class="serif-sub" style="font-size:22px;color:#F0EBE0;margin-bottom:12px;">LGBTQ+ &amp; Equality Day</p>
+        <p style="color:#F0EBE0;font-size:17px;line-height:1.8;margin-bottom:22px;font-weight:400;">Love is the whole point. Flowers are how we say it.</p>
+        <span style="font-family:'Jost',sans-serif;font-weight:600;font-size:13px;letter-spacing:0.12em;text-transform:uppercase;color:#C8D5A8;">Indigo · $115 →</span>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     FOUNDER STORY  (light linen)
+════════════════════════════════════════════ -->
+<section id="about" class="paper" style="background:#EBE3D4;padding:112px 0;overflow:hidden;">
+  <div style="max-width:1280px;margin:0 auto;padding:0 40px;">
+
+    <div style="text-align:center;margin-bottom:80px;">
+      <span class="eyebrow" style="color:#C8A96E;display:block;margin-bottom:16px;">The People Behind the Flowers</span>
+      <h2 class="serif-section" style="font-size:clamp(40px,4vw,64px);color:#1C1E19;margin:0;">
+        Thirty years in the making.<br>Still growing.
+      </h2>
+    </div>
+
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:64px;align-items:start;">
+
+      <!-- Michelle -->
+      <div>
+        <div style="aspect-ratio:3/4;max-width:380px;margin-bottom:32px;position:relative;overflow:hidden;">
+          <svg viewBox="0 0 380 506" width="380" height="506" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+            <rect width="380" height="506" fill="#2A3C1E"/>
+            <circle cx="190" cy="130" r="65" fill="#1E2A18"/>
+            <path d="M80 506 C80 360 110 310 190 295 C270 310 300 360 300 506Z" fill="#1E2A18"/>
+            <path d="M190 295 C190 295 154 220 160 168 C166 116 148 76 190 56 C232 76 214 116 220 168 C226 220 190 295 190 295Z" fill="#3A4422" opacity="0.6"/>
+            <ellipse cx="148" cy="168" rx="36" ry="15" transform="rotate(-24 148 168)" fill="#4A5E2A" opacity="0.5"/>
+            <ellipse cx="232" cy="172" rx="34" ry="14" transform="rotate(22 232 172)" fill="#3A4422" opacity="0.5"/>
+            <circle cx="190" cy="56" r="20" fill="#C8A96E" opacity="0.3"/>
+            <rect x="0" y="390" width="380" height="116" fill="url(#g1)"/>
+            <defs><linearGradient id="g1" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#1C1E19" stop-opacity="0.7"/></linearGradient></defs>
+          </svg>
+          <div style="position:absolute;bottom:28px;left:28px;">
+            <p class="serif-section" style="color:#F0EBE0;font-size:26px;margin:0 0 4px;">Michelle Damron</p>
+            <span style="font-family:'Jost',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#C8A96E;">Floral Designer · UK-trained</span>
+          </div>
+        </div>
+        <span class="gold-rule"></span>
+        <h3 class="serif-sub" style="font-size:26px;color:#1C1E19;margin-bottom:16px;">From Harrods, London to Columbus</h3>
+        <p style="color:#3A3C35;font-size:18px;line-height:1.85;margin-bottom:20px;font-weight:400;">
+          Michelle trained at floral college in the English Midlands and began her career at the famous flower halls of Harrods in London. She brought a European eye for garden design to Columbus, spending years in floral retail and interiorscapes.
+        </p>
+        <p class="serif-section" style="color:#3A4422;font-size:22px;margin:0;">"She learned to see in the gardens of the English Midlands."</p>
+      </div>
+
+      <!-- Robb -->
+      <div style="padding-top:80px;">
+        <div style="aspect-ratio:3/4;max-width:380px;margin-bottom:32px;position:relative;overflow:hidden;">
+          <svg viewBox="0 0 380 506" width="380" height="506" xmlns="http://www.w3.org/2000/svg" style="display:block;">
+            <rect width="380" height="506" fill="#1E2A18"/>
+            <circle cx="190" cy="125" r="70" fill="#141C10"/>
+            <path d="M70 506 C70 352 105 305 190 288 C275 305 310 352 310 506Z" fill="#141C10"/>
+            <path d="M190 288 C190 288 148 206 156 150 C162 98 144 56 190 36 C236 56 218 98 224 150 C230 206 190 288 190 288Z" fill="#2A3C1E" opacity="0.6"/>
+            <ellipse cx="144" cy="150" rx="38" ry="16" transform="rotate(-22 144 150)" fill="#3A4422" opacity="0.5"/>
+            <ellipse cx="236" cy="156" rx="36" ry="15" transform="rotate(20 236 156)" fill="#4A5E2A" opacity="0.5"/>
+            <circle cx="190" cy="36" r="22" fill="#8A9B6E" opacity="0.25"/>
+            <rect x="0" y="390" width="380" height="116" fill="url(#g2)"/>
+            <defs><linearGradient id="g2" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="transparent"/><stop offset="100%" stop-color="#141C10" stop-opacity="0.7"/></linearGradient></defs>
+          </svg>
+          <div style="position:absolute;bottom:28px;left:28px;">
+            <p class="serif-section" style="color:#F0EBE0;font-size:26px;margin:0 0 4px;">Robb Damron</p>
+            <span style="font-family:'Jost',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#C8A96E;">30 Years Floral Wholesale</span>
+          </div>
+        </div>
+        <span class="gold-rule"></span>
+        <h3 class="serif-sub" style="font-size:26px;color:#1C1E19;margin-bottom:16px;">From the South Side of Columbus</h3>
+        <p style="color:#3A3C35;font-size:18px;line-height:1.85;margin-bottom:28px;font-weight:400;">
+          A Capital University art graduate, Robb spent thirty years in floral wholesale — learning every step from farm to retail. He knows what the earth gives, when, and from where.
+        </p>
+        <div class="paper paper-coarse" style="background:#1E2A18;padding:36px;border-left:3px solid #C8A96E;">
+          <p class="serif-section" style="color:#F0EBE0;font-size:22px;margin-bottom:16px;font-weight:400;">
+            "They met in the floral business in Columbus, and the idea for Lēf was already growing. That was over thirty years ago."
+          </p>
+          <span style="font-family:'Jost',sans-serif;font-weight:500;font-size:14px;letter-spacing:0.1em;text-transform:uppercase;color:#C8D5A8;">243 N. 5th St · A Historical Shoe Factory · Downtown Columbus</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     TESTIMONIALS  (light oat)
+════════════════════════════════════════════ -->
+<section class="paper" style="background:#F4EFE6;padding:80px 0;border-top:1px solid rgba(58,68,34,0.12);">
+  <div style="max-width:1000px;margin:0 auto;padding:0 40px;">
+
+    <div style="text-align:center;margin-bottom:56px;">
+      <span class="eyebrow" style="color:#7A7D74;">What Our Customers Say</span>
+    </div>
+
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:48px;">
+      <div style="text-align:center;">
+        <p class="serif-section" style="color:#1C1E19;font-size:20px;margin-bottom:20px;line-height:1.7;font-weight:400;">"The arrangement was absolutely perfect. You feel the warmth the moment you walk in."</p>
+        <span style="font-family:'Jost',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#7A7D74;">— Sarah M. · Columbus</span>
+        <p style="color:#C8A96E;margin-top:10px;font-size:16px;font-weight:500;">★★★★★</p>
+      </div>
+      <div style="text-align:center;">
+        <p class="serif-section" style="color:#1C1E19;font-size:20px;margin-bottom:20px;line-height:1.7;font-weight:400;">"Michelle and Robb understood our vision from the first conversation. The wedding flowers were beyond what we imagined."</p>
+        <span style="font-family:'Jost',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#7A7D74;">— Lauren &amp; Connor · Wedding 2025</span>
+        <p style="color:#C8A96E;margin-top:10px;font-size:16px;font-weight:500;">★★★★★</p>
+      </div>
+      <div style="text-align:center;">
+        <p class="serif-section" style="color:#1C1E19;font-size:20px;margin-bottom:20px;line-height:1.7;font-weight:400;">"Ordering from Lēf feels different. Like someone actually cares what arrives at the door. Because they do."</p>
+        <span style="font-family:'Jost',sans-serif;font-weight:600;font-size:12px;letter-spacing:0.18em;text-transform:uppercase;color:#7A7D74;">— James T. · Downtown Columbus</span>
+        <p style="color:#C8A96E;margin-top:10px;font-size:16px;font-weight:500;">★★★★★</p>
+      </div>
+    </div>
+
+    <!-- Credentials -->
+    <div style="display:flex;flex-wrap:wrap;align-items:center;justify-content:center;gap:48px;margin-top:64px;padding-top:48px;border-top:1px solid rgba(58,68,34,0.12);">
+      <div style="text-align:center;">
+        <span class="eyebrow" style="color:#7A7D74;display:block;margin-bottom:8px;">Community Partner</span>
+        <p class="serif-sub" style="color:#3A4422;font-size:18px;margin:0;">Franklin Park Conservatory</p>
+      </div>
+      <div style="text-align:center;">
+        <span class="eyebrow" style="color:#7A7D74;display:block;margin-bottom:8px;">Performance Flowers</span>
+        <p class="serif-sub" style="color:#3A4422;font-size:18px;margin:0;">Columbus Concert Venues</p>
+      </div>
+      <div style="text-align:center;">
+        <span class="eyebrow" style="color:#7A7D74;display:block;margin-bottom:8px;">Training</span>
+        <p class="serif-sub" style="color:#3A4422;font-size:18px;margin:0;">Harrods, London</p>
+      </div>
+      <div style="text-align:center;">
+        <span class="eyebrow" style="color:#7A7D74;display:block;margin-bottom:8px;">Experience</span>
+        <p class="serif-sub" style="color:#3A4422;font-size:18px;margin:0;">30+ Years Columbus Floral</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     HORTUS BLOG  (light linen)
+════════════════════════════════════════════ -->
+<section id="hortus" class="paper" style="background:#EBE3D4;border-top:1px solid rgba(58,68,34,0.1);">
+  <div style="padding:72px 40px 56px;border-bottom:1px solid rgba(58,68,34,0.12);text-align:center;">
+    <span class="eyebrow" style="color:#7A7D74;display:block;margin-bottom:16px;">The Garden Journal</span>
+    <h2 class="serif-display" style="font-size:clamp(52px,6vw,84px);color:#1C1E19;margin:0;">Hortus.</h2>
+    <p style="color:#3A3C35;font-size:18px;margin-top:14px;font-weight:400;">
+      All things flower and plant — written by Michelle and Robb.
+    </p>
+  </div>
+
+  <div style="max-width:1280px;margin:0 auto;padding:64px 40px 80px;display:grid;grid-template-columns:1fr 1fr;gap:32px;">
+
+    <div style="display:flex;flex-direction:column;background:#F4EFE6;">
+      <div style="height:240px;overflow:hidden;position:relative;">
+        <img src="https://images.unsplash.com/photo-1490750967868-88df5691cc88?w=800&q=80&fit=crop&crop=center"
+          alt="Seasonal blooms"
+          style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 600ms ease;"
+          onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" />
+      </div>
+      <div style="padding:30px 32px 34px;">
+        <span class="eyebrow" style="color:#C8A96E;display:block;margin-bottom:10px;">Seasonal · May 2026</span>
+        <p class="serif-sub" style="color:#1C1E19;font-size:24px;margin-bottom:12px;line-height:1.3;">What's Blooming Right Now — and Why It Matters to Us</p>
+        <p style="color:#3A3C35;font-size:18px;line-height:1.8;margin:0;font-weight:400;">Michelle on the early-summer arrivals that make her reach for the cutting shears every morning.</p>
+      </div>
+    </div>
+
+    <div style="display:flex;flex-direction:column;background:#F4EFE6;">
+      <div style="height:240px;overflow:hidden;position:relative;">
+        <img src="https://images.unsplash.com/photo-1487530811176-3780de880c2d?w=800&q=80&fit=crop&crop=top"
+          alt="Wedding floral palette"
+          style="width:100%;height:100%;object-fit:cover;display:block;transition:transform 600ms ease;"
+          onmouseover="this.style.transform='scale(1.04)'" onmouseout="this.style.transform='scale(1)'" />
+      </div>
+      <div style="padding:30px 32px 34px;">
+        <span class="eyebrow" style="color:#C8A96E;display:block;margin-bottom:10px;">Weddings · April 2026</span>
+        <p class="serif-sub" style="color:#1C1E19;font-size:24px;margin-bottom:12px;line-height:1.3;">The 2026 Wedding Palette: What We're Actually Ordering</p>
+        <p style="color:#3A3C35;font-size:18px;line-height:1.8;margin:0;font-weight:400;">Robb on the shift from blush toward mocha mousse, terracotta, and deep jewel tones.</p>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     FOOTER  (forest — matches nav/header)
+     All text: oat #F0EBE0 primary, #C8D5A8 secondary
+     NO dark-green-on-dark-green anywhere
+════════════════════════════════════════════ -->
+<footer id="contact" class="paper paper-coarse" style="background:#1E2A18;">
+  <div style="max-width:1280px;margin:0 auto;padding:80px 40px 44px;">
+
+    <div style="display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:48px;margin-bottom:64px;">
+
+      <!-- Brand -->
+      <div>
+        <h3 class="serif-section" style="color:#F0EBE0;font-size:36px;margin-bottom:16px;line-height:1.2;">lēf floral<br>&amp; botanical</h3>
+        <p style="color:#C8D5A8;font-size:18px;line-height:1.85;font-weight:400;margin-bottom:18px;">Garden-inspired design, grown in Columbus.</p>
+        <p class="serif-section" style="color:#C8A96E;font-size:18px;margin:0;">"we love our flowers and want you to love them back."</p>
+      </div>
+
+      <!-- Visit Us — oat text throughout -->
+      <div>
+        <span class="eyebrow" style="color:#C8A96E;display:block;margin-bottom:20px;">Visit Us</span>
+        <p style="color:#F0EBE0;font-size:18px;line-height:1.85;font-weight:400;margin-bottom:14px;">243 N. 5th St<br>Columbus, OH 43215</p>
+        <p style="color:#C8D5A8;font-size:16px;line-height:1.85;font-weight:400;margin-bottom:10px;">Mon–Fri: 10am–4pm<br>Sat: Closed (Summer)<br>Delivery by noon M–F</p>
+        <p style="color:#F0EBE0;font-size:16px;font-weight:500;font-family:'Jost',sans-serif;margin:0;">(614) 254-6280</p>
+      </div>
+
+      <!-- Explore — oat links, legible -->
+      <div>
+        <span class="eyebrow" style="color:#C8A96E;display:block;margin-bottom:20px;">Explore</span>
+        <ul style="list-style:none;padding:0;margin:0;display:flex;flex-direction:column;gap:12px;">
+          <li><a href="#shop"     style="color:#F0EBE0;font-size:16px;font-family:'Jost',sans-serif;font-weight:500;text-decoration:none;transition:color 200ms;" onmouseover="this.style.color='#C8A96E'" onmouseout="this.style.color='#F0EBE0'">Shop Arrangements</a></li>
+          <li><a href="#weddings" style="color:#F0EBE0;font-size:16px;font-family:'Jost',sans-serif;font-weight:500;text-decoration:none;transition:color 200ms;" onmouseover="this.style.color='#C8A96E'" onmouseout="this.style.color='#F0EBE0'">Wedding Flowers</a></li>
+          <li><a href="#"         style="color:#F0EBE0;font-size:16px;font-family:'Jost',sans-serif;font-weight:500;text-decoration:none;transition:color 200ms;" onmouseover="this.style.color='#C8A96E'" onmouseout="this.style.color='#F0EBE0'">Plants &amp; Gifts</a></li>
+          <li><a href="#about"    style="color:#F0EBE0;font-size:16px;font-family:'Jost',sans-serif;font-weight:500;text-decoration:none;transition:color 200ms;" onmouseover="this.style.color='#C8A96E'" onmouseout="this.style.color='#F0EBE0'">About</a></li>
+          <li><a href="#hortus"   style="color:#F0EBE0;font-size:16px;font-family:'Jost',sans-serif;font-weight:500;text-decoration:none;transition:color 200ms;" onmouseover="this.style.color='#C8A96E'" onmouseout="this.style.color='#F0EBE0'">Hortus Journal</a></li>
+          <li><a href="#"         style="color:#F0EBE0;font-size:16px;font-family:'Jost',sans-serif;font-weight:500;text-decoration:none;transition:color 200ms;" onmouseover="this.style.color='#C8A96E'" onmouseout="this.style.color='#F0EBE0'">Delivery &amp; FAQ</a></li>
+        </ul>
+      </div>
+
+      <!-- Newsletter — oat text -->
+      <div>
+        <span class="eyebrow" style="color:#C8A96E;display:block;margin-bottom:20px;">From the Garden</span>
+        <p style="color:#C8D5A8;font-size:17px;line-height:1.85;font-weight:400;margin-bottom:18px;">Seasonal notes, occasional stories, and reasons to send flowers.</p>
+        <input type="email" placeholder="your@email.com"
+          style="background:rgba(240,235,224,0.09);border:1px solid rgba(240,235,224,0.25);color:#F0EBE0;padding:13px 16px;font-size:16px;width:100%;display:block;margin-bottom:10px;font-weight:400;" />
+        <button class="btn btn-deep-moss" style="width:100%;">Subscribe</button>
+        <div style="display:flex;gap:18px;margin-top:24px;">
+          <a href="#" style="color:#C8D5A8;transition:color 200ms;" onmouseover="this.style.color='#C8A96E'" onmouseout="this.style.color='#C8D5A8'">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          </a>
+          <a href="#" style="color:#C8D5A8;transition:color 200ms;" onmouseover="this.style.color='#C8A96E'" onmouseout="this.style.color='#C8D5A8'">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bottom bar — oat text, visible -->
+    <div style="padding-top:32px;border-top:1px solid rgba(240,235,224,0.1);display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;align-items:center;">
+      <p style="color:#C8D5A8;font-size:14px;font-family:'Jost',sans-serif;font-weight:400;margin:0;">© 2026 Lēf Floral &amp; Botanical · Columbus, Ohio · $14.50 flat delivery · Franklin County</p>
+      <p style="color:#C8D5A8;font-size:14px;font-family:'Jost',sans-serif;font-weight:400;margin:0;">Privacy &nbsp;·&nbsp; FAQ &nbsp;·&nbsp; Delivery Policy</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  const nav = document.getElementById('mainNav');
+  const utilityBar = document.getElementById('utilityBar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 70) {
+      nav.classList.add('scrolled');
+      utilityBar.style.transform = 'translateY(-100%)';
+      utilityBar.style.opacity = '0';
+    } else {
+      nav.classList.remove('scrolled');
+      utilityBar.style.transform = '';
+      utilityBar.style.opacity = '';
+    }
+  });
+</script>
+</body>
+</html>
